@@ -1,0 +1,367 @@
+import telebot
+from telebot import types
+from random import choice
+bot = telebot.TeleBot('2054452318:AAH9k5WLcIpQGxmpMF4aRaONbeMHn1jM-20')
+
+
+@bot.message_handler(commands=['start'])
+def welcome(message):
+  country =("Вы появились в России, что я могу сказать про это место? Плохие дороги , низкие зарплаты, дядя Ваня под вашим окном в 3 часа ночи, Путин и медведи. Вывод делайте сами.")
+  bot.send_message(message.chat.id,country)
+  if country == "Вы появились в России, что я могу сказать про это место? Плохие дороги , низкие зарплаты, дядя Ваня под вашим окном в 3 часа ночи, Путин и медведи. Вывод делайте сами.":
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="Начать читать книги", callback_data='Начать читать книги')
+      item2 = types.InlineKeyboardButton(text="Просто кайфовать", callback_data='Кайф')
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(message.chat.id,'Вы ребёнок, у вас есть два выбора',reply_markup=markup)
+
+
+@bot.message_handler(content_types=['text'])
+def welcome(message):
+ pass
+
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+  text = call.data
+  
+      
+  if text == "Начать читать книги":
+      knigi =choice(["Вы научились читать и считать, неплохо для детсадовца!","Сколько вы не учились, сколько не получали по голове, вы тупой"])
+      bot.send_message(call.message.chat.id,knigi)
+      if knigi == "Вы научились читать и считать, неплохо для детсадовца!":
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Кучка зубрил и очкариков почему-то в них вы видите себя", callback_data='Зуб1')
+        item2 = types.InlineKeyboardButton(text="Простые челы, выглядят как обычные баблквасеры", callback_data='Прост')
+        item3 = types.InlineKeyboardButton(text="Шайка забивных пацанов, не думаю что вы вольётесь в этот коллектив", callback_data='Забив1')
+        markup.add(item1)
+        markup.add(item2)
+        markup.add(item3)
+        bot.send_message(call.message.chat.id,'Вы уже в школе, всё для вас кажется новым и не изведаным, пора завести друзей! Выбери компанию по душе.',reply_markup=markup)
+
+  if text == "Прост":
+    e = ("Они были обычными друзьями и плохими и не хорошими, но вы не жаловались")
+    bot.send_message(call.message.chat.id,e)
+    markup = types.InlineKeyboardMarkup()
+    item1 = types.InlineKeyboardButton(text="", callback_data='')
+    item2 = types.InlineKeyboardButton(text="", callback_data='')     
+    markup.add(item1)
+    markup.add(item2)
+    bot.send_message(call.message.chat.id,'',reply_markup=markup)
+
+
+
+  if text == "Забив1":
+      d = ("Реша познакомится с ними вы потерепли ошибку, хоть вы с ними вы и дружили но они постоянно издевались над вами")
+      bot.send_message(call.message.chat.id,d)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="", callback_data='')
+      item2 = types.InlineKeyboardButton(text="", callback_data='')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,'В итоге у вас не было хороших друзей',reply_markup=markup)
+
+
+  if text == "Зуб1":
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Согласиться", callback_data='Согл')
+        item2 = types.InlineKeyboardButton(text="Отказаться", callback_data='Отказ')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Вы оделись и пошли гулять, ничего не предвещало беды как вдруг мы повстречались с забивными челами они коса посмотрели на нас и пошли в нашу сторону',reply_markup=markup)
+    
+  if text == "Отказ":
+      h = ('Ваши друзья перестали с вами дружить, вы стали дединсайдом и через неделю повесились. Это конец!')
+      bot.send_message(call.message.chat.id,h)
+    
+  if text == "Согл":
+      b = ('Вы оделись и пошли гулять, ничего не предвещало беды как вдруг мы повстречались с забивными челами они коса посмотрели на нас и пошли в нашу сторону!')
+      bot.send_message(call.message.chat.id,b)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="Заступится", callback_data='Заступ')
+      item2 = types.InlineKeyboardButton(text="Постоять в сторонке", callback_data='Сторон')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,'Самый отбитый из них подошол к моему другу. Они начали выеснять у моего друга почему он не дал им списать. Дело плохо может дойти до драки надо действовать!',reply_markup=markup)
+
+  if text == "Заступ":
+      j = ('Вы отолкнули обидчика но надо было понимать что влетит вам! Так и произошло вам в лицо влетел кулак а после вас начили бить ногами. Это было больно!')
+      bot.send_message(call.message.chat.id,j)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="Пойти в колледж", callback_data='Колл 2')
+      item2 = types.InlineKeyboardButton(text="В рабство Илону Маску", callback_data='Илон')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,'Благодаря этому поступку вы стали круче среди друзей. Настала взрослая жизнь выбирайте что делать дальше',reply_markup=markup)
+
+  if text == "Сторон":
+      c = ('Вы постояли в сторонке смотря как бьют вашего другаю. Вам было стыдно, но ваша задница была важнее друга')
+      bot.send_message(call.message.chat.id,c)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="Пойти в колледж", callback_data='Колл 2')
+      item2 = types.InlineKeyboardButton(text="В рабство Илону Маску", callback_data='Илон')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,' После этого он с вами не дружил и постепенно ваша группа начала распадатся. Настала взрослая жизнь выбирайте что делать дальше',reply_markup=markup)
+
+
+  if text == "Кайф":
+      a = ("Вы просто гуляли, отдыхали и вас ничо не волновало, но уму у вас не прибавилось")
+      bot.send_message(call.message.chat.id,a)
+      if a == "Вы просто гуляли, отдыхали и вас ничо не волновало, но уму у вас не прибавилось":
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Кучка зубрил и очкариков, они вам совсем не по душе", callback_data='Зуб2')
+        item2 = types.InlineKeyboardButton(text="Простые челы, выглядят как обычные баблквасеры", callback_data='Прост') 
+        item3 = types.InlineKeyboardButton(text="Шайка забивных пацанов, такие как и вы, ленивые и забивные", callback_data='Забив2')    
+        markup.add(item1)
+        markup.add(item2)
+        markup.add(item3)
+        bot.send_message(call.message.chat.id,'Вы уже в школе, всё для вас кажется новым и не изведаным, пора завести друзей! Выбери компанию по душе.',reply_markup=markup)
+    
+
+  if text == "Зуб2":
+      f = ('Вы попытались с ними подружится, но они слишком умные для вас')
+      bot.send_message(call.message.chat.id,f)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="", callback_data='')
+      item2 = types.InlineKeyboardButton(text="", callback_data='')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,'В итоге у вас не было хороших друзей',reply_markup=markup)
+
+  if text == "Забив2":
+      k = ('Вам нравилось с ними дружить они были хорошими друзьями Забивные друзья были вам по душе')
+      bot.send_message(call.message.chat.id,k)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="Согласиться", callback_data='Согл1')
+      item2 = types.InlineKeyboardButton(text="Отказаться", callback_data='Отказ')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,'Однажды они позвали вас гулять. Что делать будем?',reply_markup=markup)
+
+  if text == "Согл1":
+      k = ('Вы оделись и пошли гулять, вы гуляли и ели сухари за 10руб. Но по пути вы встретили группу зубрил')
+      bot.send_message(call.message.chat.id,k)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="Поддержать друга", callback_data='Подд')
+      item2 = types.InlineKeyboardButton(text="Остановить друга", callback_data='Останов')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,'Вспомнив что один из них не дал списать контрошу корешу вы пошли в их сторону. Твой друг начал гнать на очкарика...',reply_markup=markup)
+
+  if text == "Подд":
+      Pod = ('Вы поддержали своего друга и вместе избили бедного чела это было жестоко!')
+      bot.send_message(call.message.chat.id,Pod)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="Идти в колледж", callback_data='колл')
+      item2 = types.InlineKeyboardButton(text="Идти в пятёрку", callback_data='пятёрка')
+      item3 = types.InlineKeyboardButton(text="Создать банду с друзьями", callback_data='банда')     
+      markup.add(item1)
+      markup.add(item2)
+      markup.add(item3)
+      bot.send_message(call.message.chat.id,'Хоть вам и влетело после этого но вы стали круче в группе своих корешей. Настала взрослая жизнь выбирайте что делать',reply_markup=markup)
+
+  if text == "Останов":
+      ost = ('Вы попытались остановить друга но вам только влетело от него. Очкарик в это время смылся')
+      bot.send_message(call.message.chat.id,ost)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="Идти в колледж", callback_data='колл')
+      item2 = types.InlineKeyboardButton(text="Идти работать в пятёрочку", callback_data='пятёрка 1')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,'Вас избили кореши теперь вы не состоите в их банде. Настала взрослая жизнь выбирай куда идти',reply_markup=markup)
+
+  if text == "банда":
+        banda = ('Вы с друзьями решили создать свою банду пока что вас мало но кто знает что будет дальше')
+        bot.send_message(call.message.chat.id,banda)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Пойти на забив", callback_data='драка')
+        item2 = types.InlineKeyboardButton(text="Не идти на забив а собрать команду получше", callback_data='беззабива')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'За 1 месяц к вам присоединилось больше 100 людей. Вы можете пойти на забив с другой группой',reply_markup=markup)
+
+  if text == "пятёрка 1":
+        pat = ('Вы пошли работать в пятёрочку оставив прошлых друзей и достижения')
+        bot.send_message(call.message.chat.id,pat)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Проткнуть себя стрелой", callback_data='стрела рек')
+        item2 = types.InlineKeyboardButton(text="Пройти мимо", callback_data='мимо')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Идя на работу в кустах вы заметили золотую стрелу. Хмм...',reply_markup=markup)
+
+
+  if text == "мимо":
+        pat = ('Не решившись поднять стрелу вы пошли на работу')
+        bot.send_message(call.message.chat.id,pat)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="МММ", callback_data='ммм')
+        item2 = types.InlineKeyboardButton(text="Продолжить сидеть на стуле", callback_data='стул')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Вам надоело сидеть на стуле и пикать продукты вы решаетесь заскамить всю Россию',reply_markup=markup)
+  if text == "колл":
+        koll = ('Вы решили поступить в колледж хорошее решение')
+        bot.send_message(call.message.chat.id,koll)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="На строителя", callback_data='строит')
+        item2 = types.InlineKeyboardButton(text="Пойти в армию", callback_data='арм')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Вот только на кого ты пойдёшь учится',reply_markup=markup)
+
+  if text == "драка":
+        draka = ('Вы решили пойти на забив, у соперника немного больше людей')
+        bot.send_message(call.message.chat.id,draka)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Слабые вперёд сильный сзади", callback_data='1тактика')
+        item2 = types.InlineKeyboardButton(text="Сильные вперёд слабые назад", callback_data='2тактика')
+        item3 = types.InlineKeyboardButton(text="Гигант и мушкетёр", callback_data='3тактика')     
+        markup.add(item1)
+        markup.add(item2)
+        markup.add(item3)
+        bot.send_message(call.message.chat.id,'Битва скоро начнётся! Выберите тактику для победу',reply_markup=markup)
+
+  if text == "беззабива":
+       nedraka = ('Вы решили подождать с дракой. Это было плохим решением, банда развалилась')
+       bot.send_message(call.message.chat.id,nedraka)
+       markup = types.InlineKeyboardMarkup()
+       item1 = types.InlineKeyboardButton(text="Идти в колледж", callback_data='колл')
+       item2 = types.InlineKeyboardButton(text="Идти работать в пятёрочку", callback_data='пятёрка')     
+       markup.add(item1)
+       markup.add(item2)
+       bot.send_message(call.message.chat.id,'После развала банды у вас есть только два выбора',reply_markup=markup)
+
+  if text == "стрела рек":
+        strel = ('Вы не долго думая проткнули себя стрелой, кровь полилась из вашей груди. Вы теряете сознание...')
+        bot.send_message(call.message.chat.id,strel)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Захватить мир и достичь рая", callback_data='рай ')
+        item2 = types.InlineKeyboardButton(text="Поехать в Египет", callback_data='Поехать')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Вы лежите в больнице. Ваша рана уже зажила. Встав с кровати вы понимаете что теперь вы обладатель очень большой силой. Что будете делать?',reply_markup=markup)
+
+  
+  if text == "строит":
+        stroit = ('Когда вы сказали что хотите учится на строителя то вас выгнали из вуза и отдали на поучение таджикам')
+        bot.send_message(call.message.chat.id,stroit)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Просто построить дом", callback_data='просто строить')
+        item2 = types.InlineKeyboardButton(text="Сделать ужасный дом что он сломался(план скам)", callback_data='план скам')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Спустя целый год учений вы стали профисиональным строителем. Вашей команде доверили построить дом для президента',reply_markup=markup)
+
+  if text == "арм":
+        arm = ('Вы решили не идти учится а пойти в армию где вас ждут месяцы тренировок и приключений')
+        bot.send_message(call.message.chat.id,arm)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="Спецназ", callback_data='спец')
+        item2 = types.InlineKeyboardButton(text="Терры", callback_data='теры')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Вы уже месяц на ходитесь в армии России. Кем вы хотите стать',reply_markup=markup)
+
+  if text == "1тактика":
+          draka1 = ('Самые слабые пошли вперёд а сильные сзади, эта был не лучший выбор. Вы проиграли, банда распалась, жизнь стала скукой. Это конец')
+          bot.send_message(call.message.chat.id,draka1)
+
+  if text == "2тактика":
+          draka2 = ('Сильные пошли вперёд а слабые добили раненых. Вы выйграли')
+          bot.send_message(call.message.chat.id,draka2)
+          markup = types.InlineKeyboardMarkup()
+          item1 = types.InlineKeyboardButton(text="Торговля травкой", callback_data='травк')
+          item2 = types.InlineKeyboardButton(text="Попрашайничать всей бандой", callback_data='попраш')     
+          markup.add(item1)
+          markup.add(item2)
+          bot.send_message(call.message.chat.id,'В вашей банде уже больше 500 человек у вас есть связи со многими городами, пора заняться бизнесом',reply_markup=markup)
+
+  if text == "3тактика":
+          draka3 = ('Клэшеры поймут! Гениальная тактика. Вы победили')
+          bot.send_message(call.message.chat.id,draka3)
+          markup = types.InlineKeyboardMarkup()
+          item1 = types.InlineKeyboardButton(text="Торговля травкой", callback_data='травк')
+          item2 = types.InlineKeyboardButton(text="Попрашайничать всей бандой", callback_data='попраш')     
+          markup.add(item1)
+          markup.add(item2)
+          bot.send_message(call.message.chat.id,'В вашей банде уже больше 500 человек у вас есть связи со многими городами, пора заняться бизнесом',reply_markup=markup)
+
+
+  if text == "Илон":
+      ilon = ('Это был самый обычный день вы шли по улице и вдруг к вам подъехала чёрная машина и забрала вас. Очнувшись вы увидели перед собой Илона Маска...')
+      bot.send_message(call.message.chat.id,ilon)
+      markup = types.InlineKeyboardMarkup()
+      item1 = types.InlineKeyboardButton(text="", callback_data='')
+      item2 = types.InlineKeyboardButton(text="", callback_data='')     
+      markup.add(item1)
+      markup.add(item2)
+      bot.send_message(call.message.chat.id,'Что бы продолжить игру секретным последствием заплатите разработчику 100рублей',reply_markup=markup)
+
+  if text == "спец":
+        spec = ('Вы были в хорошей физической форме так что вы подошли под роль спецназа')
+        bot.send_message(call.message.chat.id,spec)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text='Кинуть дымавуху и пойти в наступление', callback_data='дым')
+        item2 = types.InlineKeyboardButton(text="Отвлечь их кинув гранату и пойти в наступление", callback_data='гранат')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Сегодня у вас первая миссия. Ваша задача захватить дом терраристов. Кого-то из ваших убили а у теров хорошая позиция, что делать ?',reply_markup=markup)
+
+  if text == "дым":
+        dim = ('Вы кинули дымавуху и пошли в наступление хоть вас и подбило вы захватили дом')
+        bot.send_message(call.message.chat.id,dim)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text='Уйти в отставку и жить обычной жизнью', callback_data='обыч жиз')
+        item2 = types.InlineKeyboardButton(text="Продолжить работать", callback_data='продолж')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'За то что вы ресковали своей жизнью вы повысились в звании теперь вы Маёр',reply_markup=markup)
+
+  if text == "гранат":
+        granat = ('Вы кинули гранату и не слишком сильно отвлекли теров. Вас убили. Это конец...')
+        bot.send_message(call.message.chat.id,spec)
+       
+  if text == "травк":
+          travk = ('Вы начали зарабатывать много денег. Это очень прибыльный бизнес, но интерес полиции к вам стал больше')
+          bot.send_message(call.message.chat.id,travk)
+          markup = types.InlineKeyboardMarkup()
+          item1 = types.InlineKeyboardButton(text="Спросить у копа что ему нужно", callback_data='спросит')
+          item2 = types.InlineKeyboardButton(text="Взять биту", callback_data='бита')     
+          markup.add(item1)
+          markup.add(item2)
+          bot.send_message(call.message.chat.id,'Когда вы сидели с пацанами в гараже и считали деньги кто-то увидел копов в окне. Вы идёте к двери что бы перехватить его',reply_markup=markup)
+          
+  if text == "попраш":
+          poprash = ('Ваша банда начала немного зарабатывать ')
+          bot.send_message(call.message.chat.id,poprash)
+          markup = types.InlineKeyboardMarkup()
+          item1 = types.InlineKeyboardButton(text="Спросить у копа что ему нужно", callback_data='спросит')
+          item2 = types.InlineKeyboardButton(text="Взять биту", callback_data='бита')     
+          markup.add(item1)
+          markup.add(item2)
+          bot.send_message(call.message.chat.id,'',reply_markup=markup)
+
+  if text == "стул":
+        styl = ('')
+        bot.send_message(call.message.chat.id,styl)
+        markup = types.InlineKeyboardMarkup()
+        item1 = types.InlineKeyboardButton(text="МММ", callback_data='ммм')
+        item2 = types.InlineKeyboardButton(text="Продолжить сидеть на стуле", callback_data='стул')     
+        markup.add(item1)
+        markup.add(item2)
+        bot.send_message(call.message.chat.id,'Вам надоело сидеть на стуле и пикать продукты вы решаетесь заскамить всю Россию',reply_markup=markup)
+
+
+
+
+
+
+
+
+
+
+bot.polling(none_stop=True)
