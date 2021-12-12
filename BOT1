@@ -1,6 +1,6 @@
 import telebot
 from telebot import types
-from random import choice
+from random import choice  #устанавливаем библиотеки
 bot = telebot.TeleBot('2054452318:AAH9k5WLcIpQGxmpMF4aRaONbeMHn1jM-20')
 
 
